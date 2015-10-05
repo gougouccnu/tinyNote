@@ -18,7 +18,8 @@
         </activity>
         <activity android:name=".WriteNoteActivity" >
         </activity>
-
+        <activity android:name=".EditNoteActivity" >
+        </activity>
     </application>
 
 </manifest>

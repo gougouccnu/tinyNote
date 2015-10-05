@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -42,6 +43,15 @@ public class MainActivity extends Activity {
                 R.layout.note_item, notesItemList);
         HorizontalScrollListView listView = (HorizontalScrollListView) findViewById(R.id.note_item);
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                NotesItem item = notesItemList.get(position);
+                // 启动日记查看编辑活动，同时将日记title传递过去
+                Intent intent = new Intent(MainActivity.this, EditNoteActivity.class);
+                startActivity(intent);
+            }
+        });
 
         //write display
         buttonWrite.setOnClickListener(new View.OnClickListener() {
