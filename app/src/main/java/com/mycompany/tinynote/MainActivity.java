@@ -22,6 +22,8 @@ public class MainActivity extends Activity {
     private Button buttonWrite;
     private TextViewVertical titleMonth;
 
+    private MyDatabaseHelper dbHelper;
+
     private List<NotesItem> notesItemList = new ArrayList<NotesItem>();
 
     //private TextViewVertical textViewVertical = new TextViewVertical(this);
@@ -30,6 +32,9 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        dbHelper = new MyDatabaseHelper(this, "NoteStore.db", null, 1);
+        dbHelper.getWritableDatabase();
 
         titleYear = (TextViewVertical) findViewById(R.id.title_year);
         buttonWrite = (Button) findViewById(R.id.button_write);
