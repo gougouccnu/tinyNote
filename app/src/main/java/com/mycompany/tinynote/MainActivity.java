@@ -41,7 +41,7 @@ public class MainActivity extends Activity {
         //查询NOTE表中最近月份的笔记并显示出来，
         //db.rawQuery("select id,year,month from Note where id = 1", null);
         Cursor cursor = db.query("Note", new String[] {"id","year","month"},
-                "id" + "=" + "1", null, null, null, null);
+                null, null, null, null, null);
         if (cursor.moveToFirst()) {
             year = cursor.getString(cursor.getColumnIndex("year"));
             month = cursor.getString(cursor.getColumnIndex("month"));
