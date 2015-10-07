@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.mycompany.tinynote.TextViewVertical
+    <TextView
         android:id="@+id/note_item"
         android:text="一日"
         android:layout_width="wrap_content"

@@ -2,6 +2,8 @@ package com.mycompany.tinynote;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -23,6 +25,7 @@ public class MainActivity extends Activity {
     private TextViewVertical titleMonth;
 
     private MyDatabaseHelper dbHelper;
+    private String year,month,title;
 
     private List<NotesItem> notesItemList = new ArrayList<NotesItem>();
 
@@ -34,16 +37,42 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         dbHelper = new MyDatabaseHelper(this, "NoteStore.db", null, 1);
-        dbHelper.getWritableDatabase();
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        //查询NOTE表中最近月份的笔记并显示出来，
+        //db.rawQuery("select id,year,month from Note where id = 1", null);
+        Cursor cursor = db.query("Note", new String[] {"id","year","month"},
+                "id" + "=" + "1", null, null, null, null);
+        if (cursor.moveToFirst()) {
+            year = cursor.getString(cursor.getColumnIndex("year"));
+            month = cursor.getString(cursor.getColumnIndex("month"));
+            //查询最近月份的笔记
+            //db.rawQuery("select title from Note where location =?","wuhan" null);
+            Cursor cursor2 = db.query("Note", new String[] {"title"}, "month=?", new String[] { "十月" },
+                    null,null,null);
+            if (cursor2.moveToFirst()) {
+                do {
+                    //遍历cursor对象，取出数据
+                    title = cursor2.getString(cursor2.getColumnIndex("title"));
+                    //添加到note list中
+                    NotesItem item = new NotesItem(title);
+                    notesItemList.add(item);
+                } while (cursor2.moveToNext());
+            }
+        } else { //若表为空，则显示当前年月
+            year = "二零一五年";
+            month = "十月";
+        }
+        cursor.close();
 
         titleYear = (TextViewVertical) findViewById(R.id.title_year);
         buttonWrite = (Button) findViewById(R.id.button_write);
         titleMonth = (TextViewVertical) findViewById(R.id.title_month);
         //TextViewVertical
         //textViewVertical.setText("2015年");
-        titleYear.setText("二零一五年");
+        titleYear.setText(year);
+        titleMonth.setText(month);
 
-        initNotesItem();
+
         NotesItemAdapter adapter = new NotesItemAdapter(MainActivity.this,
                 R.layout.note_item, notesItemList);
         HorizontalScrollListView listView = (HorizontalScrollListView) findViewById(R.id.note_item);
@@ -70,6 +99,7 @@ public class MainActivity extends Activity {
     }
 
     private void initNotesItem() {
+
         NotesItem item1 = new NotesItem("一日");
         notesItemList.add(item1);
         NotesItem item2 = new NotesItem("三日记录");

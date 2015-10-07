@@ -58,9 +58,13 @@ public class WriteNoteActivity extends Activity {
                 content = noteContent.getText().toString();
 
                 Calendar c = Calendar.getInstance();
-                year = c.getDisplayName(Calendar.YEAR, Calendar.LONG, Locale.CHINA);
+                int y = c.get(Calendar.YEAR);
+                int m = c.get(Calendar.MONTH);
+                int d = c.get(Calendar.DAY_OF_MONTH);
+
+                year = "二零而五年";
                 month = c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.CHINA);
-                day = c.getDisplayName(Calendar.DAY_OF_MONTH, Calendar.LONG, Locale.CHINA);
+                day = "七日";
                 Log.d("WriteNoteActivity","current date is year: " + year +
                 "month: " + month + "day: " + day);
                 // 保存日记到数据库
