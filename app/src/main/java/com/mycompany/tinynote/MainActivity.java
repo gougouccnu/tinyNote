@@ -81,8 +81,10 @@ public class MainActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 NotesItem item = notesItemList.get(position);
-                // 启动日记查看编辑活动，同时将日记title传递过去
+                // 启动日记查看编辑活动，同时将日记title,month传递过去
                 Intent intent = new Intent(MainActivity.this, EditNoteActivity.class);
+                intent.putExtra("extra_noteTitle", item.getTitle());
+                intent.putExtra("extra_noteMonth", month);
                 startActivity(intent);
             }
         });

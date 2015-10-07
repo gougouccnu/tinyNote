@@ -2,6 +2,9 @@ package com.mycompany.tinynote;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,19 +21,50 @@ public class EditNoteActivity extends Activity {
     private TextViewVertical noteEditContent;
     private TextViewVertical noteEditTitle;
 
+    private MyDatabaseHelper dbHelper;
+    private String content;
+    private String location;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_note);
 
-        // 查询数据库得到日记项目 TO DO
+        // 从intent中恢复笔记title,month，
+        Intent intent = getIntent();
+        final String title = intent.getStringExtra("extra_noteTitle");
+        final String month = intent.getStringExtra("extra_noteMonth");
+
+        dbHelper = new MyDatabaseHelper(this, "NoteStore.db", null, 1);
+        final SQLiteDatabase db = dbHelper.getWritableDatabase();
+        // 查询数据库得到日记其他信息
+        Cursor cursor = db.query("Note", new String[] {"content","location"},
+                "title=? and month=?", new String[] {title, month}, null, null, null);
+        if (cursor.moveToFirst()) {
+            content = cursor.getString(cursor.getColumnIndex("content"));
+            location = cursor.getString(cursor.getColumnIndex("location"));
+        } else { //若表为空，则...
+            content = "null";
+            location = "null";
+        }
+        cursor.close();
+        // 显示该日记
+        noteEditTitle = (TextViewVertical) findViewById(R.id.note_edit_title);
+        noteEditContent = (TextViewVertical) findViewById(R.id.note_edit_content);
+        noteEditLocation = (TextViewVertical) findViewById(R.id.note_edit_location);
+        noteEditTitle.setText(title);
+        noteEditContent.setText(content);
+        noteEditLocation.setText(location);
 
         // 修改按钮
         buttonModify = (Button) findViewById(R.id.edit);
         buttonModify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(EditNoteActivity.this, WriteNoteActivity.class);
+                Intent intent = new Intent(EditNoteActivity.this, ModifyNoteActivity.class);
+                intent.putExtra("extra_modify_title", title);
+                intent.putExtra("extra_modify_content", content);
+                intent.putExtra("extra_modify_location", location);
                 startActivity(intent);
             }
         });
@@ -47,7 +81,12 @@ public class EditNoteActivity extends Activity {
         buttonDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                int deletRow = db.delete("Note", "title = ? and content = ?",
+                        new String[] {title,content});
+//                if (deletRow == 1) {
+                    Intent intent = new Intent(EditNoteActivity.this, MainActivity.class);
+                    startActivity(intent);
+//                }
             }
         });
 
