@@ -13,7 +13,8 @@
         android:text="2015年"
         android:gravity="right"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginRight="25dp" />
 
     <Button
         android:id="@+id/button_write"
@@ -23,7 +24,8 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="false"
         android:layout_alignParentTop="false"
-        android:layout_below="@+id/title_year" />
+        android:layout_below="@+id/title_year"
+        android:layout_marginRight="0dp" />
 
     <com.mycompany.tinynote.TextViewVertical
         android:id="@+id/title_month"
@@ -32,16 +34,24 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="false"
-        android:layout_below="@+id/button_write" />
-    <com.mycompany.tinynote.HorizontalScrollListView
+        android:layout_below="@+id/button_write"
+        android:layout_marginRight="25dp" />
+    <com.mycompany.tinynote.HorizontalListView
         android:id="@+id/note_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@+id/title_month"
         android:layout_alignParentBottom="false"
-        android:layout_centerVertical="true">
+        android:layout_centerVertical="true"
+        android:layout_below="@+id/button_write"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginBottom="50dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp">
 
-    </com.mycompany.tinynote.HorizontalScrollListView>
+    </com.mycompany.tinynote.HorizontalListView>
 
 
 </RelativeLayout>

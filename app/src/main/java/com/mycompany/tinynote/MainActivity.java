@@ -6,8 +6,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.GestureDetector;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -27,14 +29,50 @@ public class MainActivity extends Activity {
     private MyDatabaseHelper dbHelper;
     private String year,month,title;
 
-    private List<NotesItem> notesItemList = new ArrayList<NotesItem>();
+    private HorizontalListViewAdapter hlva;
+    private HorizontalListView hlv;
 
+    public List<NotesItem> notesItemList = new ArrayList<NotesItem>();
+    //public String[] noteItemList = new String[30];
     //private TextViewVertical textViewVertical = new TextViewVertical(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        hlv = (HorizontalListView)findViewById(R.id.note_item);
+        hlva = new HorizontalListViewAdapter(this, notesItemList);
+        //hlva.notifyDataSetChanged();
+        hlv.setAdapter(hlva);
+
+
+        hlv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                // TODO Auto-generated method stub
+//				if(olderSelectView == null){
+//					olderSelectView = view;
+//				}else{
+//					olderSelectView.setSelected(false);
+//					olderSelectView = null;
+//				}
+//				olderSelectView = view;
+//				view.setSelected(true);
+                //previewImg.setImageResource(ids[position]);
+                //hlva.setSelectIndex(position);
+                //hlva.notifyDataSetChanged();
+                NotesItem item = notesItemList.get(position);
+                // 启动日记查看编辑活动，同时将日记title,month传递过去
+                Intent intent = new Intent(MainActivity.this, EditNoteActivity.class);
+                intent.putExtra("extra_noteTitle", item.getTitle());
+                intent.putExtra("extra_noteMonth", month);
+                startActivity(intent);
+            }
+        });
+
 
         dbHelper = new MyDatabaseHelper(this, "NoteStore.db", null, 1);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -56,6 +94,7 @@ public class MainActivity extends Activity {
                     //添加到note list中
                     NotesItem item = new NotesItem(title);
                     notesItemList.add(item);
+                    //noteItemList.
                 } while (cursor2.moveToNext());
             }
         } else { //若表为空，则显示当前年月
@@ -72,7 +111,7 @@ public class MainActivity extends Activity {
         titleYear.setText(year);
         titleMonth.setText(month);
 
-
+        /*
         NotesItemAdapter adapter = new NotesItemAdapter(MainActivity.this,
                 R.layout.note_item, notesItemList);
         HorizontalScrollListView listView = (HorizontalScrollListView) findViewById(R.id.note_item);
@@ -88,7 +127,7 @@ public class MainActivity extends Activity {
                 startActivity(intent);
             }
         });
-
+        */
         //write display
         buttonWrite.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,25 +147,4 @@ public class MainActivity extends Activity {
         notesItemList.add(item2);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }

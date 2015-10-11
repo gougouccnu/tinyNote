@@ -8,6 +8,7 @@
         android:id="@+id/note_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:hint="title"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true" />
 
@@ -15,6 +16,7 @@
         android:id="@+id/note_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="content"
         android:layout_below="@+id/note_title" />
 
     <TextView
