@@ -9,6 +9,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by lishaowei on 15/10/5.
  */
@@ -24,6 +27,12 @@ public class EditNoteActivity extends Activity {
     private MyDatabaseHelper dbHelper;
     private String content;
     private String location;
+
+
+    private HorizontalListViewAdapter hlva;
+    private HorizontalListView hlv;
+
+    public List<NotesItem> notesItemList = new ArrayList<NotesItem>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,11 +59,24 @@ public class EditNoteActivity extends Activity {
         cursor.close();
         // 显示该日记
         noteEditTitle = (TextViewVertical) findViewById(R.id.note_edit_title);
-        noteEditContent = (TextViewVertical) findViewById(R.id.note_edit_content);
+        //noteEditContent = (TextViewVertical) findViewById(R.id.note_edit_content);
         noteEditLocation = (TextViewVertical) findViewById(R.id.note_edit_location);
         noteEditTitle.setText(title);
-        noteEditContent.setText(content);
+        //noteEditContent.setText(content);
         noteEditLocation.setText(location);
+
+        String[] mcontentString= content.split("\\n");
+        for(int i = 0; i < mcontentString.length; i++) {
+            String mtemp = mcontentString[mcontentString.length - i - 1];
+            NotesItem item = new NotesItem(mtemp);
+            notesItemList.add(item);
+        }
+        //显示日记内容
+        hlv = (HorizontalListView)findViewById(R.id.note_edit_content);
+        hlva = new HorizontalListViewAdapter(this, notesItemList);
+        //hlva.notifyDataSetChanged();
+        hlv.setAdapter(hlva);
+
 
         // 修改按钮
         buttonModify = (Button) findViewById(R.id.edit);
