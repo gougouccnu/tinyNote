@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,6 +21,7 @@ public class EditNoteActivity extends Activity {
     private Button buttonModify;
     private Button buttonSave;
     private Button buttonDelete;
+
     private TextViewVertical noteEditLocation;
     private TextViewVertical noteEditContent;
     private TextViewVertical noteEditTitle;
@@ -57,10 +59,17 @@ public class EditNoteActivity extends Activity {
             location = "null";
         }
         cursor.close();
+
+        Typeface customFont = Typeface.createFromAsset(this.getAssets(), "fonts/KangXi.ttf");
+        //titleYear = (TextViewVertical) findViewById(R.id.title_year);
+        //titleYear.setTypeface(customFont);
+
         // 显示该日记
         noteEditTitle = (TextViewVertical) findViewById(R.id.note_edit_title);
+        noteEditTitle.setTypeface(customFont);
         //noteEditContent = (TextViewVertical) findViewById(R.id.note_edit_content);
         noteEditLocation = (TextViewVertical) findViewById(R.id.note_edit_location);
+        noteEditLocation.setTypeface(customFont);
         noteEditTitle.setText(title);
         //noteEditContent.setText(content);
         noteEditLocation.setText(location);
