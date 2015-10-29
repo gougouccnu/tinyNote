@@ -12,13 +12,16 @@
     <com.mycompany.tinynote.TextViewVertical
         android:id="@+id/title_year"
         android:text="二零一五年"
+        style="@style/textViewVertical"
         android:gravity="right"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:typeface="normal"/>
 
     <Button
         android:id="@+id/button_write"
         android:text="写"
+        style="@style/textViewVertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -57,6 +60,7 @@
         <com.mycompany.tinynote.TextViewVertical
             android:id="@+id/title_month"
             android:text="六月"
+            style="@style/textViewVertical"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

@@ -10,7 +10,9 @@
     <com.mycompany.tinynote.TextViewVertical
         android:id="@+id/note_item"
         android:text="一日"
+        style="@style/textViewVertical"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:typeface="normal"/>
 
 </LinearLayout>

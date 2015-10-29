@@ -91,9 +91,9 @@ public class HorizontalListViewAdapter extends BaseAdapter{
         protected void onPreExecute() {
             super.onPreExecute();
             View view = mInflater.inflate(R.layout.note_item, null);
-            TextViewVertical tx =(TextViewVertical)view.findViewById(R.id.note_item);
-            Typeface customFont = Typeface.createFromAsset(mContext.getAssets(), "fonts/KangXi.ttf");
-            tx.setTypeface(customFont);
+            //TextViewVertical tx =(TextViewVertical)view.findViewById(R.id.note_item);
+            //Typeface customFont = Typeface.createFromAsset(mContext.getAssets(), "fonts/KangXi.ttf");
+            //tx.setTypeface(customFont);
         }
 
         // This is run in a background thread

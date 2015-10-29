@@ -177,9 +177,9 @@ public class MainActivity extends Activity {
         protected void onPostExecute(String result) {
             Typeface customFont = Typeface.createFromAsset(MainActivity.this.getAssets(), "fonts/KangXi.ttf");
             titleYear = (TextViewVertical) findViewById(R.id.title_year);
-            titleYear.setTypeface(customFont);
+            //titleYear.setTypeface(customFont);
             titleMonth = (TextViewVertical) findViewById(R.id.title_month);
-            titleMonth.setTypeface(customFont);
+            //titleMonth.setTypeface(customFont);
 
             //TextViewVertical
             //textViewVertical.setText("2015年");

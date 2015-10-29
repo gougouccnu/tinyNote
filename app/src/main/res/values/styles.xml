@@ -5,4 +5,7 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="textViewVertical" parent="@android:style/Widget.TextView">
+        <item name="com.mycompany.tinynote:font">fonts/KangXi.ttf</item>
+    </style>
 </resources>
