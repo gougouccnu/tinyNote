@@ -12,24 +12,24 @@
     <com.mycompany.tinynote.TextViewVertical
         android:id="@+id/title_year"
         android:text="二零一五年"
-        style="@style/textViewVertical"
+        style="@style/customFont"
         android:gravity="right"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:typeface="normal"/>
-
     <Button
         android:id="@+id/button_write"
         android:text="写"
-        style="@style/textViewVertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:textSize="21sp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/custombutton"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="false"
         android:layout_alignParentTop="false"
         android:layout_below="@+id/title_year"
-        android:textColor="#ffff383b"
-        android:layout_gravity="right" />
+        android:layout_gravity="right"/>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -52,7 +52,9 @@
                 android:layout_below="@+id/button_write"
                 android:paddingLeft="0dp"
                 android:paddingRight="0dp"
-                android:layout_gravity="right">
+                android:layout_gravity="right"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp">
 
             </com.mycompany.tinynote.HorizontalListView>
         </LinearLayout>
@@ -60,7 +62,7 @@
         <com.mycompany.tinynote.TextViewVertical
             android:id="@+id/title_month"
             android:text="六月"
-            style="@style/textViewVertical"
+            style="@style/customFont"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

@@ -13,6 +13,7 @@
         <com.mycompany.tinynote.TextViewVertical
             android:id="@+id/note_edit_time"
             android:text="二零一五年十二月八日"
+            style="@style/customFont"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -20,6 +21,7 @@
         <com.mycompany.tinynote.TextViewVertical
             android:id="@+id/note_edit_location"
             android:text="武汉市"
+            style="@style/customFont"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -43,6 +45,7 @@
         <com.mycompany.tinynote.TextViewVertical
             android:id="@+id/note_edit_title"
             android:text="三日"
+            style="@style/customFont"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -59,19 +62,50 @@
 
         <Button
             android:id="@+id/edit"
+
             android:text="改"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:textColor="#FFFFFF"
+            android:textSize="21sp"
+
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/custombutton"
+            android:layout_marginRight="24dp" />
         <Button
+            android:id="@+id/save"
+
+            android:text="存"
+            android:textColor="#FFFFFF"
+            android:textSize="21sp"
+
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/custombutton" />
+        <Button
+            android:id="@+id/delete"
+
+            android:text="删"
+            android:textColor="#FFFFFF"
+            android:textSize="21sp"
+
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/custombutton"
+            android:layout_marginLeft="24dp" />
+        <!--Button
+            style="@style/customButton"
             android:id="@+id/save"
             android:text="存"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <Button
+            style="@style/customButton"
             android:id="@+id/delete"
             android:text="删"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="#ea2424"
+            android:textColor="#fefefe" /-->
 
     </LinearLayout>
 
